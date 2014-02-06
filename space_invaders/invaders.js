@@ -3,10 +3,11 @@ $(document).ready(function(){main();});
 //Audio http://samples.mameworld.info/
 var shipLaser = new Audio("audio/3.wav");
 var explosion = new Audio("audio/12.wav");
+var incomingInvaders = new Audio("audio/14.wav");
+var invadersChangeDirection = new Audio("audio/8.wav");
 
 
 //Images
-
 var invaderA = new Image();
 invaderA.src = "images/invader1.png";
 
@@ -42,7 +43,7 @@ var gameOver = false;
 var wave = 1;
 
 // Invaders
-var updateLogic = false;
+var changeDirection = false;
 var direction = 1;
 var invaderSpeed = 5;
 var invaderYAxis = 0;
@@ -87,7 +88,7 @@ $(document).keyup(keyStrokeUp);
 function startGame() {
 	var player = new Player(10,scoreCanvas.height - 30, ship);
 	spawnPlayer(player);
-	
+	invadersChangeDirection.play();
 	for(var i = 0; i<= 11; i++){
 		for(j = 0; j <=6; j++){
 			if (j == 0){
@@ -101,7 +102,7 @@ function startGame() {
 }
 
 function update(){
-	
+	incomingInvaders.play();
 	display.redraw();
 	
 	if (gameOver != true){	
@@ -122,8 +123,11 @@ function update(){
 			projectile.update(100);
 		}
 		
-		if (updateLogic == true){
-			updateLogic = false;
+		if (changeDirection == true){
+			changeDirection = false;
+			invadersChangeDirection.pause();
+			invadersChangeDirection.currentTime = 0;
+			invadersChangeDirection.play();
 			direction = -direction;
 			invaderSpeed = -invaderSpeed;
 			invaderYAxis = 10;
@@ -385,10 +389,10 @@ function Invader (_x, _y, _imgSrc, _imgSrcA)
 			}
 			
 			if (this.x + (this._width + 6) >= gameCanvas.width && direction == 1){
-				updateLogic = true;
+				changeDirection = true;
 			}
 			else if(this.x - 6 <= 0 && direction != 1){
-				updateLogic = true;
+				changeDirection = true;
 			}
 			
 			this.frame = -this.frame;
