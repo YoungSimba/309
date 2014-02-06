@@ -1,5 +1,9 @@
 $(document).ready(function(){main();});
 
+//Audio http://samples.mameworld.info/
+var shipLaser = new Audio("audio/3.wav");
+var explosion = new Audio("audio/12.wav");
+
 
 //Images
 
@@ -63,6 +67,9 @@ function keyStrokeDown(evt) {
   else if (evt.keyCode == 37) leftArrow = true;
   if (evt.keyCode == 32){
 	fire = true;
+	shipLaser.pause();
+	shipLaser.currentTime = 0;
+	shipLaser.play();
 	var missile = new Projectile(players[0].x + (players[0]._width/2), players[0].y - 10, missileImg, missileImg, 5, 1);
 	spawnMissle(missile);
   };
@@ -209,6 +216,9 @@ function impactCheck(){
 				if (projectile.x >= enemy.x && projectile.x <= (enemy.x + enemy._width)){
 					if (projectile.y <= (enemy.y + enemy._height) && projectile.y >= (enemy.y)){
 						killInvader(enemy);
+						explosion.pause();
+						explosion.currentTime = 0;
+						explosion.play();
 						killMissle(projectile);
 						players[0]._score += 100;
 					}
@@ -220,6 +230,7 @@ function impactCheck(){
 				if (projectile.x >= player.x && projectile.x <= (player.x + player._width)){
 					if (projectile.y <= (player.y + player._height) && projectile.y >= (player.y)){
 						killMissle(projectile);
+						explosion.play();
 						player._lives --;
 					}
 				}
