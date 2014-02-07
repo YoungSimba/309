@@ -7,22 +7,24 @@ html, body
 
 body
 {
+		width: 1024px;
+	height: 768px;
     color: #ffffff;
-    background-color: #fff;
+    background-color: #000000;
     font-family: arial;
     font-size: 12px;
 }
 
 #game_container{
-	top: 268px;
-	left: 97px;
+	top: 290px;
+	left: 250px;
 	position: relative;
 	width: 570px;
 }
 
 #game_bezel{
-	width: 762px;
-	height: 800px;
+	width: 1024px;
+	height: 768px;
 	background-image: url('images/background.png');
 	position: absolute;
 }
@@ -58,10 +60,13 @@ body
 }
 
 .score,.lives{
+	font-size: 1.2em;
+	    color: #ff0000;
 	width: 70%;
 	float: right;
 }
 
 .lives{
+	color: #ff0000;
 	width: 30%;
 }	
