@@ -6,7 +6,8 @@ var explosion = new Audio("audio/12.wav");
 var incomingInvaders = new Audio("audio/14.wav");
 var invadersChangeDirection = new Audio("audio/8.wav");
 
-//Authentic Images http://all-free-download.com/free-vector/vector-icon/space_invader_icons_144948_download.html
+//Authentic Images http://all-free-download.com/free-vector/vector-icon/
+//space_invader_icons_144948_download.html
 var invaderA = new Image();
 invaderA.src = "images/invader1.png";
 
@@ -72,7 +73,8 @@ function keyStrokeDown(evt) {
 	shipLaser.pause();
 	shipLaser.currentTime = 0;
 	shipLaser.play();
-	var missile = new Projectile(players[0].x + (players[0]._width/2), players[0].y - 10, missileImg, missileImg, 5, 1);
+	var missile = new Projectile(players[0].x + (players[0]._width/2), 
+		players[0].y - 10, missileImg, missileImg, 5, 1);
 	spawnMissle(missile);
   };
 }
@@ -86,7 +88,7 @@ function keyStrokeUp(evt) {
 $(document).keydown(keyStrokeDown);
 $(document).keyup(keyStrokeUp);
 
-//function startGame.  Performs initilization of the invaders, score
+//function startGame.  Performs initilization of the invaders
 //and player. 
 function startGame() {
 	var player = new Player(10,scoreCanvas.height - 30, ship);
@@ -95,9 +97,11 @@ function startGame() {
 	for(var i = 0; i<= 11; i++){
 		for(j = 0; j <=6; j++){
 			if (j == 0){
-				var enemy = new Invader(10 + (i*34), 40 + (j*25), orangeAlien, orangeAlienA);
+				var enemy = new Invader(10 + (i*34), 40 + (j*25), orangeAlien, 
+					orangeAlienA);
 			}else{
-				var enemy = new Invader(10 + (i*34), 40 + (j*25), invaderA, invaderB);
+				var enemy = new Invader(10 + (i*34), 40 + (j*25), invaderA, 
+					invaderB);
 			}
 			spawnInvader(enemy);
 		}
@@ -105,7 +109,7 @@ function startGame() {
 }
 
 //function update.  Iterates through the data structures containing invaders
-//enemies and missiles and incerments their positions on the game board.
+//enemies and missiles and incerments their positions.
 function update(){
 	incomingInvaders.play();
 	display.redraw();
@@ -150,7 +154,8 @@ function update(){
 			
 			if (enemy._fire == true){
 				enemy._fire = false;
-				var projectile = new Projectile(enemy.x + (enemy._width/2), enemy.y + 10, enemyMissileImg1, enemyMissileImg2, -5, 2);
+				var projectile = new Projectile(enemy.x + (enemy._width/2), 
+					enemy.y + 10, enemyMissileImg1, enemyMissileImg2, -5, 2);
 				spawnMissle(projectile);
 			}
 		}
@@ -207,7 +212,8 @@ function resizeCanvas ()
 	scoreCanvas.width    = 570;
 	scoreCanvas.height    = 350;
 		
-	$('#game_bezel').css('left', (document.width / 2) - ($('#game_bezel').width() / 2) + 'px');
+	$('#game_bezel').css('left', (document.width / 2) - 
+		($('#game_bezel').width() / 2) + 'px');
 		
 	if (display != null) {
 		display.init(gameCanvas);
@@ -215,7 +221,7 @@ function resizeCanvas ()
 	
 }
 
-//function impactCheck.  Iterate through the missiles and check for impact.
+//function impactCheck.  Iterate through the missiles array and check for impact.
 function impactCheck(){
 	for (var id in missiles) {
 		var projectile = missiles[id];
@@ -224,8 +230,10 @@ function impactCheck(){
 			for (var eid in invaders) {
 				var enemy = invaders[eid];
 				
-				if (projectile.x >= enemy.x && projectile.x <= (enemy.x + enemy._width)){
-					if (projectile.y <= (enemy.y + enemy._height) && projectile.y >= (enemy.y)){
+				if (projectile.x >= enemy.x && projectile.x <= (enemy.x + 
+					enemy._width)){
+					if (projectile.y <= (enemy.y + enemy._height) && 
+						projectile.y >= (enemy.y)){
 						killInvader(enemy);
 						explosion.pause();
 						explosion.currentTime = 0;
@@ -238,8 +246,10 @@ function impactCheck(){
 		}else{
 			for (var pid in players) {
 				var player = players[pid];
-				if (projectile.x >= player.x && projectile.x <= (player.x + player._width)){
-					if (projectile.y <= (player.y + player._height) && projectile.y >= (player.y)){
+				if (projectile.x >= player.x && projectile.x <= (player.x + 
+					player._width)){
+					if (projectile.y <= (player.y + player._height) && 
+						projectile.y >= (player.y)){
 						killMissle(projectile);
 						explosion.play();
 						player._lives --;
@@ -261,9 +271,11 @@ function incrementInvaders() {
 	for(i = 0; i<= 11; i++){
 		for(j = 0; j <=6; j++){
 			if (j == 0){
-				var enemy = new Invader(10 + (i*34), 40 + (j*25), orangeAlien, orangeAlienA);
+				var enemy = new Invader(10 + (i*34), 40 + (j*25), orangeAlien, 
+					orangeAlienA);
 			}else{
-				var enemy = new Invader(10 + (i*34), 40 + (j*25), invaderA, invaderB);
+				var enemy = new Invader(10 + (i*34), 40 + (j*25), invaderA, 
+					invaderB);
 			}
 			spawnInvader(enemy);
 		}
@@ -344,7 +356,8 @@ function incrementInvaders() {
 			this._context.drawImage(player.imgSrc, player.x, player.y);
 			
 			for (i=0; i<= player._lives; i++){
-				this._context.drawImage(player.imgSrc, (this._width / 2) + 180 + (i * 38), 10);
+				this._context.drawImage(player.imgSrc, (this._width / 2) + 180 
+					+ (i * 38), 10);
 			}
 			
 			this._context.restore();
@@ -355,9 +368,11 @@ function incrementInvaders() {
 			this._context.save();
 			
 			if (projectile.frame == 1){
-				this._context.drawImage(projectile.imgSrc, projectile.x, projectile.y);
+				this._context.drawImage(projectile.imgSrc, projectile.x, 
+					projectile.y);
 			}else{
-				this._context.drawImage(projectile.imgSrcA, projectile.x, projectile.y);
+				this._context.drawImage(projectile.imgSrcA, projectile.x, 
+					projectile.y);
 			}
 			
 			this._context.restore();
@@ -397,7 +412,8 @@ function Invader (_x, _y, _imgSrc, _imgSrcA)
 				this._fire = true;
 			}
 			
-			if (this.x + (this._width + 6) >= gameCanvas.width && direction == 1){
+			if (this.x + (this._width + 6) >= gameCanvas.width && direction == 
+				1){
 				changeDirection = true;
 			}
 			else if(this.x - 6 <= 0 && direction != 1){

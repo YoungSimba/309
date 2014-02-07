@@ -53,10 +53,11 @@ body
 
 #gameover{
 	display: none;
+	color: #FFFF00;
 	margin-top: 150px;
 	width: 570px;
 	text-align: center;
-	font-size: 2.7em;
+	font-size: 3.7em;
 }
 
 .score,.lives{
