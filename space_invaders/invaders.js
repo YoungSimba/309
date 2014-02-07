@@ -161,7 +161,8 @@ function update(){
 	}
 }
 
-//Add/Remove functions.  Add and remove invaders and missiles from the canvass.
+//Add/Remove functions.  Add and remove invaders and missiles from the game
+//board.
 
 function spawnInvader(enemy){
 	invaders[enemy.id] = enemy;

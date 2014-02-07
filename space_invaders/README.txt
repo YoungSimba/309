@@ -1,0 +1,1 @@
+Alien invaders are trying to take over the planet and the Earth needs your help!  Welcome to Space Invaders!  We have developped a game with images and sounds from the original game leaving players with a classic arcade-like Space Invaders experience.
