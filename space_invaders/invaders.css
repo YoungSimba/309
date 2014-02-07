@@ -51,12 +51,12 @@ body
 	left: 6px;
 }
 
-#gameover{
+gameover{
 	display: none;
 	margin-top: 150px;
 	width: 570px;
 	text-align: center;
-	font-size: 2.2em;
+	font-size: 2.7em;
 }
 
 .score,.lives{
