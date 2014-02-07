@@ -51,7 +51,7 @@ body
 	left: 6px;
 }
 
-gameover{
+#gameover{
 	display: none;
 	margin-top: 150px;
 	width: 570px;

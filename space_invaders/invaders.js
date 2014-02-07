@@ -62,6 +62,8 @@ rightArrow = false;
 leftArrow = false;
 fire = false;
 
+//function keyStrokeDown takes a keyboard event as arguement
+//and determines the correct action to take.
 function keyStrokeDown(evt) {
   if (evt.keyCode == 39) rightArrow = true;
   else if (evt.keyCode == 37) leftArrow = true;
@@ -84,6 +86,8 @@ function keyStrokeUp(evt) {
 $(document).keydown(keyStrokeDown);
 $(document).keyup(keyStrokeUp);
 
+//function startGame.  Performs initilization of the invaders, score
+//and player. 
 function startGame() {
 	var player = new Player(10,scoreCanvas.height - 30, ship);
 	spawnPlayer(player);
@@ -100,6 +104,8 @@ function startGame() {
 	}
 }
 
+//function update.  Iterates through the data structures containing invaders
+//enemies and missiles and incerments their positions on the game board.
 function update(){
 	incomingInvaders.play();
 	display.redraw();
@@ -155,7 +161,7 @@ function update(){
 	}
 }
 
-//Add/Remove
+//Add/Remove functions.  Add and remove invaders and missiles from the canvass.
 
 function spawnInvader(enemy){
 	invaders[enemy.id] = enemy;
@@ -208,6 +214,7 @@ function resizeCanvas ()
 	
 }
 
+//function impactCheck.  Iterate through the missiles and check for impact.
 function impactCheck(){
 	for (var id in missiles) {
 		var projectile = missiles[id];
@@ -247,6 +254,7 @@ function impactCheck(){
 	
 }
 
+//function incermentInvaders.  Spawn new invaders when there are none left. 
 function incrementInvaders() {
 	wave++;
 	for(i = 0; i<= 11; i++){
@@ -263,7 +271,7 @@ function incrementInvaders() {
 
 
 
-
+//function Refresh.  Redraws the canvass.
 (function () {
 	
 	function Refresh(canvas){
@@ -358,6 +366,7 @@ function incrementInvaders() {
 
 })();
 
+//Class for invaders.
 function Invader (_x, _y, _imgSrc, _imgSrcA)
     {
         this.id = invaderIdCounter++; 
@@ -404,7 +413,7 @@ function Invader (_x, _y, _imgSrc, _imgSrcA)
     
 };
 
-
+//Class for projectiles.
 function Projectile (_x, _y, _imgSrc, _imgSrcA, _speed, _type)
     {
         this.id = missileIdCounter++; 
@@ -431,6 +440,7 @@ function Projectile (_x, _y, _imgSrc, _imgSrcA, _speed, _type)
     
 };
 
+//Class for players.
 function Player (_x, _y, _imgSrc)
     {
     	idCounter = 0;
