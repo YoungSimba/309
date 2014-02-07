@@ -1,13 +1,12 @@
 $(document).ready(function(){main();});
 
-//Audio http://samples.mameworld.info/
+//Authentic Audio http://samples.mameworld.info/
 var shipLaser = new Audio("audio/3.wav");
 var explosion = new Audio("audio/12.wav");
 var incomingInvaders = new Audio("audio/14.wav");
 var invadersChangeDirection = new Audio("audio/8.wav");
 
-
-//Images
+//Authentic Images http://all-free-download.com/free-vector/vector-icon/space_invader_icons_144948_download.html
 var invaderA = new Image();
 invaderA.src = "images/invader1.png";
 
@@ -455,7 +454,7 @@ function Player (_x, _y, _imgSrc)
 				this.x += this._speed;
 			}
 		}
-		
+    	
 		if (leftArrow == true){
 			if (this.x - 6 >= 0){
 				this.x -= this._speed;
@@ -473,4 +472,4 @@ function main ()
     display    = new Refresh(gameCanvas);
     startGame();
     window.setInterval(update, Math.ceil(1000 / frameRate));
-}      
+} 
