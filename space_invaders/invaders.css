@@ -23,7 +23,7 @@ body
 #game_bezel{
 	width: 762px;
 	height: 800px;
-	background-image: url('images/canvasinv.png');
+	background-image: url('images/background.png');
 	position: absolute;
 }
 

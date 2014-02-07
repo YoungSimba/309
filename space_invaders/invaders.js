@@ -14,10 +14,10 @@ var invaderB = new Image();
 invaderB.src = "images/invader12.png";
 
 var orangeAlien = new Image();
-orangeAlien.src = "images/invader2.png";
+orangeAlien.src = "images/invaderz.png";
 
 var orangeAlienA = new Image();
-orangeAlienA.src = "images/invader22.png";
+orangeAlienA.src = "images/invaderzz.png";
 
 var ship = new Image();
 ship.src = "images/ship.png";
