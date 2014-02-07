@@ -465,7 +465,7 @@ function Projectile (_x, _y, _imgSrc, _imgSrcA, _speed, _type)
 //Class for players. 
 //	The Classes for these objects keep track of the x and y position, direction and 
 // speed on the canvas.  Method class.update increments x and y positions.
-speed on the canvas.  Method class.update increments x and y positions and speed/time.
+//speed on the canvas.  Method class.update increments x and y positions and speed/time.
 function Player (_x, _y, _imgSrc)
     {
     	idCounter = 0;
