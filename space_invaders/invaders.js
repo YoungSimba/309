@@ -284,7 +284,8 @@ function incrementInvaders() {
 
 
 
-//function Refresh.  Redraws the canvass.
+//function Refresh.  Redraws the canvass from the x and y coordinates of the
+// various objects.  Adds and removes objects from the canvass.
 (function () {
 	
 	function Refresh(canvas){
@@ -383,6 +384,8 @@ function incrementInvaders() {
 })();
 
 //Class for invaders.
+//	The Classes for these objects keep track of the x and y position, direction and 
+// speed on the canvas.  Method class.update increments x and y positions.
 function Invader (_x, _y, _imgSrc, _imgSrcA)
     {
         this.id = invaderIdCounter++; 
@@ -431,6 +434,8 @@ function Invader (_x, _y, _imgSrc, _imgSrcA)
 };
 
 //Class for projectiles.
+//	The Classes for these objects keep track of the x and y position, direction and 
+// speed on the canvas.  Method class.update increments x and y positions.
 function Projectile (_x, _y, _imgSrc, _imgSrcA, _speed, _type)
     {
         this.id = missileIdCounter++; 
@@ -457,7 +462,10 @@ function Projectile (_x, _y, _imgSrc, _imgSrcA, _speed, _type)
     
 };
 
-//Class for players.
+//Class for players. 
+//	The Classes for these objects keep track of the x and y position, direction and 
+// speed on the canvas.  Method class.update increments x and y positions.
+speed on the canvas.  Method class.update increments x and y positions and speed/time.
 function Player (_x, _y, _imgSrc)
     {
     	idCounter = 0;
