@@ -1,73 +1,28 @@
-html, body
-{
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>form</title>
+    <style>
+      input { display: block; }
+      form { margin: 10px; }
+    </style>
+    
+  </head>
+  <body>
+    <h1>GET vs POST</h1>
+    <form action="cgi-bin/stdin.sh" method="get">
+      Param 1 <input type="text" name="param1" />  
+      Param 2 <input type="text" name="param2" />
+      <input type="submit" value="GET"/>
+    </form>
 
-body
-{
-		width: 1024px;
-	height: 768px;
-    color: #ffffff;
-    background-color: #000000;
-    font-family: arial;
-    font-size: 12px;
-}
+    <form action="cgi-bin/stdin.sh" method="post">
+      Param 1 <input type="text" name="param1" />  
+      Param 2 <input type="text" name="param2" />
+      <input type="submit" value="POST"/>
+    </form>
 
-#game_container{
-	top: 290px;
-	left: 250px;
-	position: relative;
-	width: 570px;
-}
+  </body>
+</html>
 
-#game_bezel{
-	width: 1024px;
-	height: 768px;
-	background-image: url('images/background.png');
-	position: absolute;
-}
 
-#invaders-canvas, #score-canvas
-{
-	position: absolute;
-	left: 0px;
-	top: 0px;
-}
-
-#score-canvas{
-	background: #000;
-}
-
-#hud{
-	font-size: 1.6em;
-	width: 570px;
-	height: 350px;
-	color: #fff;
-	font-weight: bold;
-	position: absolute; 
-	top: 6px; 
-	left: 6px;
-}
-
-#gameover{
-	display: none;
-	color: #FFFF00;
-	margin-top: 150px;
-	width: 570px;
-	text-align: center;
-	font-size: 3.7em;
-}
-
-.score,.lives{
-	font-size: 1.2em;
-	    color: #ff0000;
-	width: 70%;
-	float: right;
-}
-
-.lives{
-	color: #ff0000;
-	width: 30%;
-}	

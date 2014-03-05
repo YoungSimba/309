@@ -30,31 +30,26 @@ levels.
 In our code, the user defined object include:
 *********************************************
 
-
-1) Invader --- function Invader (_x, _y, _imgSrc, _imgSrcA) 
-
-2) Projectile --- function Projectile (_x, _y, _imgSrc, _imgSrcA, _speed, _type)
-
-3) Player Ship --- function Player (_x, _y, _imgSrc)
-	
 	The Classes for these objects keep track of the x and y position, direction and 
 
 speed on the canvas.  Method class.update increments these x and y positions.
 
-	A variable speed is used to increment x and y positions of the user objects.  
+(1) Invader --- function Invader (_x, _y, _imgSrc, _imgSrcA) 
 
-Increasing the speed variable will cause the update function to shift objects farther on the 
+(2) Projectile --- function Projectile (_x, _y, _imgSrc, _imgSrcA, _speed, _type)
 
-canvas.  
+(3) Player Ship --- function Player (_x, _y, _imgSrc)
+ 
+(4) update() --- Updates the direction and position of Invaders and Missiles.
+
+(5) Refresh(canvas) --- Redraws the various elements onto the canvass, using their x and y positions.
+
+(6) impactChack() --- Checks for impact between Missiles and player or Enemies and if found removes the affected objects.
 
 Data Structures:
 ****************
 
-	We implemented two one dimensional array type data structures in our code, one for the invader 
-
-objects and the other for the projectile objects.  The array is indexed by the unique 
-
-ID of the invader or the projectile.  
+	We implemented two one dimensional array type data structures in our code, one for the invader objects and the other for the projectile objects.  The array is indexed by the unique ID of the invader or the projectile.  
 
 Enhancements:
 *************
