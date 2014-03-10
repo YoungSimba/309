@@ -155,31 +155,31 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
     <ul class="nav">
       <li><?php 
 	echo "<p>" . anchor('candystore/listCustomer','List Customers') . "</p>"; ?></li>
-      <li><a href="#">Clear Cart</a></li>
+      <li><?php 
+	echo "<p>" . anchor('candystore/logout','Clear Cart') . "</p>"; ?></li>
       <li><a href="#">Logout</a></li>
       <li><a href="#">Checkout</a></li>
     </ul>
 <h3>Cart</h3>
 <?php
-if(isset($_SESSION["products"]))
+if(isset($_COOKIE["candystore"]))
 {
     $total = 0;
     echo '<ol>';
-    foreach ($_SESSION["products"] as $cart_itm)
+    foreach (unserialize($_COOKIE["candystore"]) as $cart_itm)
     {
         echo '<li class="cart-itm">';
-        echo '<span class="remove-itm"><a href="cart_update.php?removep='.$cart_itm["code"].'&return_url='.$current_url.'">&times;</a></span>';
+        echo '<span class="remove-itm"><a href="cart_update.php?removep='.$cart_itm["code"].'">&times;</a></span>';
         echo '<h3>'.$cart_itm["name"].'</h3>';
         echo '<div class="p-code">P code : '.$cart_itm["code"].'</div>';
         echo '<div class="p-qty">Qty : '.$cart_itm["qty"].'</div>';
-        echo '<div class="p-price">Price :'.$currency.$cart_itm["price"].'</div>';
+        echo '<div class="p-price">Price :'.$cart_itm["price"].'</div>';
         echo '</li>';
         $subtotal = ($cart_itm["price"]*$cart_itm["qty"]);
         $total = ($total + $subtotal);
     }
     echo '</ol>';
-    echo '<span class="check-out-txt"><strong>Total : '.$currency.$total.'</strong> <a href="view_cart.php">Check-out!</a></span>';
-    echo '<span class="empty-cart"><a href="cart_update.php?emptycart=1&return_url='.$current_url.'">Empty Cart</a></span>';
+
 }else{
     echo 'Your Cart is empty';
 }
@@ -187,7 +187,7 @@ if(isset($_SESSION["products"]))
     <!-- end .sidebar1 --></div>
     <h1>Product Table</h1>
   <div class="container">
-  <?php
+  <?php $qty = 3;
 echo "<p>" . anchor('candystore/newForm','Add New') . "</p>";
  
 echo "<table>";
@@ -203,6 +203,7 @@ echo "<td><img src='" . base_url() . "images/product/" . $product->photo_url . "
 echo "<td>" . anchor("candystore/delete/$product->id",'Delete',"onClick='return confirm(\"Do you really want to delete this record?\");'") . "</td>";
 echo "<td>" . anchor("candystore/editForm/$product->id",'Edit') . "</td>";
 echo "<td>" . anchor("candystore/read/$product->id",'View') . "</td>";
+echo "<td>" . anchor("candystore/buy?var1=$product->id&var2=$qty",'Buy',"onClick='return confirm(\"Do you really want to purchase this item?\");'") . "</td>";
 
 echo "</tr>";
 }

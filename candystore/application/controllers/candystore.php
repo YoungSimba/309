@@ -162,4 +162,36 @@ class CandyStore extends CI_Controller {
 	function newOrder(){
 			$this->load->view('order/newOrder.php');
 	}
+	
+	function buy(){
+		$this->load->model('product_model');
+		
+		$product = $this->product_model->get($this->input->get('var1'));
+		$name = $product->name;
+		$qty = $this->input->get('var2');
+		
+		if(isset($_COOKIE["candystore"]))	{
+			$new_product = array(array('name'=>$product->name, 'code'=>$product->id, 'qty'=>$qty, 'price'=>$product->price));
+			$_COOKIE['candystore'] = serialize($new_product);
+				redirect('candystore/index', 'refresh');
+		}
+		else{
+
+        $new_product = array(array('name'=>$product->name, 'code'=>$product->id, 'qty'=>$qty, 'price'=>$product->price));
+		setcookie('candystore', serialize($new_product), time()+(60*60*24*30), '/');
+        
+		redirect('candystore/index', 'refresh');	
+		}
+		
+		
+		
+	}
+	
+	function logout(){
+		setcookie('candystore', "", time()-(60*60*24*30), '/');
+		redirect('candystore/index', 'refresh');
+	}
+
+
 }
+
