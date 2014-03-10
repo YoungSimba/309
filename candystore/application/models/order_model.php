@@ -1,6 +1,5 @@
 <?php
-class Product_model extends CI_Model {
-
+class Order_model extends CI_Model {
 
 	function getAll()
 	{  

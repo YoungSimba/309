@@ -1,4 +1,4 @@
-<h2>New Product</h2>
+<h2>New Order</h2>
 
 <style>
 	input { display: block;}

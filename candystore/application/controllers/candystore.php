@@ -20,6 +20,7 @@ class CandyStore extends CI_Controller {
     }
 
     function index() {
+			
     		$this->load->model('product_model');
     		$products = $this->product_model->getAll();
     		$data['products']=$products;
@@ -117,10 +118,48 @@ class CandyStore extends CI_Controller {
 		//Then we redirect to the index page again
 		redirect('candystore/index', 'refresh');
 	}
-      
-   
-    
-    
-    
-}
+	
+	function newCustomer(){
+			$this->load->view('customer/newCustomer.php');
+	}
+	
+	function createCustomer() {
+		$this->load->model('product_model');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('first','First','required');
+		$this->form_validation->set_rules('last','Last','required');
+	
+		
+		
+		if ($this->form_validation->run() == true) {
+			$this->load->model('customer_model');
+			$customer = new Customer();
+			$customer->first = $this->input->get_post('first');
+			$customer->last = $this->input->get_post('last');
+			$customer->login = $this->input->get_post('login');
+			$customer->password = $this->input->get_post('password');
+			$customer->email = $this->input->get_post('email');
+			
+			$this->customer_model->insert($customer);
 
+			//Then we redirect to the index page again
+			redirect('candystore/index', 'refresh');
+		}
+		else {
+			
+			$this->load->view('customer/newCustomer.php');
+		}	
+	}
+	
+	function listCustomer() {
+			
+    		$this->load->model('customer_model');
+    		$customers = $this->customer_model->getAll();
+    		$data['customers']=$customers;
+    		$this->load->view('customer/list.php',$data);
+    }
+	
+	function newOrder(){
+			$this->load->view('order/newOrder.php');
+	}
+}
