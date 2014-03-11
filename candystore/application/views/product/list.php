@@ -131,22 +131,23 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 
 <body>
 
+
 <div class="container">
-  <div class="header"><a href="index.php"><img src="/htdocs/309/candystore/images/pole.jpg" alt="Insert Logo Here" name="Insert_logo" width="200" height="200" id="Insert_logo" style="background: #C6D580; display:block;" /></a> 				<div class="fltrt"><?php $count = 22;
-		if ( isset($_REQUEST["username"]) && $_REQUEST["username"] == "John") {
+  <div class="header"><a href="index.php"><img src="/htdocs/309/candystore/images/pole.jpg" alt="Insert Logo Here" name="Insert_logo" width="200" height="200" id="Insert_logo" style="background: #C6D580; display:block;" /></a> 				<div class="fltrt">
+  
+  
+  <?php
+	if ((isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true )    ) {	
 	?>
 			<p>
-			Hi <?= $count?>. </p> 		
+			Hi <?= $_SESSION['username']?>.
+			</p>     		
 	<?php 		
 		}
 		else {
-	?>
-<?php 
-	echo "<p>" . anchor('candystore/newCustomer','New Customer') . "</p>"; ?>	
-	
-	<?php 		
+	 echo "<p>" . anchor('candystore/newCustomer','New Customer') . "</p>";
 		}
-	?>			<form action="index.php">
+	?>				<form action="index.php">
 		<input type="text" name="search" />
 		<input type="submit" value="Search" />
 			</form>	</div>
@@ -175,8 +176,6 @@ if(isset($_COOKIE["candystore"]))
         echo '<div class="p-qty">Qty : '.$cart_itm["qty"].'</div>';
         echo '<div class="p-price">Price :'.$cart_itm["price"].'</div>';
         echo '</li>';
-        $subtotal = ($cart_itm["price"]*$cart_itm["qty"]);
-        $total = ($total + $subtotal);
     }
     echo '</ol>';
 
@@ -214,25 +213,17 @@ echo "<table>";
     <!-- end .content --></div>
   <div class="footer">
   <?php
-  		if ( isset($_REQUEST["username"]) && $_REQUEST["username"] == "John") {
+	if ((isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true )    ) {	
 	?>
 			<p>
-			Hi <?= $count?> times.
-			</p>		
+			Hi <?= $_SESSION['username']?>.
+			</p>     		
 	<?php 		
 		}
 		else {
-	?>
-  			<form action="index.php">
-				Username <input type="text" name="username" />
-				Password <input type="text" name="password" />
-				<input type="submit" value="Login" />
-			</form>
-	
-	<?php 		
+	 echo "<p>" . anchor('candystore/login','Login') . "</p>";
 		}
 	?>	
-
 
     <!-- end .footer --></div>
   <!-- end .container --></div>

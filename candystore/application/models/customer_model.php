@@ -7,6 +7,13 @@ class Customer_model extends CI_Model {
 		return $query->result('Customer');
 	}  
 	
+	function authenticate($login, $password){
+			$obj = $this->db->get_where('customer',array('login' => $login));
+			$user =  $obj->row(0,'Customer');
+			return ($user->password == $password);
+		
+	}
+	
 	function get($id)
 	{
 		$query = $this->db->get_where('customer',array('id' => $id));

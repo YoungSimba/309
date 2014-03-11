@@ -6,6 +6,7 @@ class CandyStore extends CI_Controller {
     function __construct() {
     		// Call the Controller constructor
 	    	parent::__construct();
+			session_start();
 	    	
 	    	
 	    	$config['upload_path'] = './images/product/';
@@ -159,25 +160,56 @@ class CandyStore extends CI_Controller {
     		$this->load->view('customer/list.php',$data);
     }
 	
+
+	
 	function newOrder(){
-			$this->load->view('order/newOrder.php');
+			$this->load->model('customer_model');
 	}
 	
 	function buy(){
 		$this->load->model('product_model');
+		$item = $this->product_model->get($this->input->get('var1'));
+		$qty = $this->input->get('var2');
 		
-		$product = $this->product_model->get($this->input->get('var1'));
-		$name = $product->name;
+		$new_product = array(array('name'=>$item->name, 'code'=>$item->id, 'qty'=>$qty, 'price'=>$item->price));
+        
 		$qty = $this->input->get('var2');
 		
 		if(isset($_COOKIE["candystore"]))	{
-			$new_product = array(array('name'=>$product->name, 'code'=>$product->id, 'qty'=>$qty, 'price'=>$product->price));
-			$_COOKIE['candystore'] = serialize($new_product);
+			$found = false; //set found item to false
+   
+            foreach (unserialize($_COOKIE["candystore"]) as $cart_itm) //loop through session array
+            {
+                if($cart_itm["code"] == $item->id){ //the item exist in array
+
+                    $product[] = array('name'=>$cart_itm["name"], 'code'=>$cart_itm["code"], 'qty'=>$cart_itm["qty"] += $qty, 'price'=>$cart_itm["price"]);
+                    $found = true;
+					
+					
+					
+                }else{
+                    //item doesn't exist in the list, just retrive old info and prepare array for session var
+                    $product[] = array('name'=>$cart_itm["name"], 'code'=>$cart_itm["code"], 'qty'=>$cart_itm["qty"], 'price'=>$cart_itm["price"]);
+                }
+            }
+           
+            if($found == false) //we didn't find item in array
+            {
+                //add new user item in array
+                setcookie('candystore', serialize(array_merge($product, $new_product)), time()+(60*60*24*30), '/');
+				
 				redirect('candystore/index', 'refresh');
+            }else{
+                //found user item in array list, and increased the quantity
+                setcookie('candystore', serialize($product), time()+(60*60*24*30), '/');
+				redirect('candystore/index', 'refresh');
+            }
+			
+			
 		}
+		
 		else{
 
-        $new_product = array(array('name'=>$product->name, 'code'=>$product->id, 'qty'=>$qty, 'price'=>$product->price));
 		setcookie('candystore', serialize($new_product), time()+(60*60*24*30), '/');
         
 		redirect('candystore/index', 'refresh');	
@@ -189,7 +221,29 @@ class CandyStore extends CI_Controller {
 	
 	function logout(){
 		setcookie('candystore', "", time()-(60*60*24*30), '/');
+		session_destroy();
 		redirect('candystore/index', 'refresh');
+	}
+	
+	
+	function login(){
+		$this->load->view('customer/login.php');
+	}
+	
+	function authenticate(){
+		$this->load->model('customer_model');
+
+    		if ($this->customer_model->authenticate($this->input->get_post('login'), $this->input->get_post('password')) ){
+				
+  				$_SESSION["loggedin"] = true;
+				$_SESSION["username"] = $this->input->get_post('login');
+				if ($_SESSION['loggedin'] == true){
+					redirect('candystore/index', 'refresh');
+				}
+			}
+			
+			
+		
 	}
 
 
