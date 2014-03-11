@@ -214,17 +214,19 @@ class CandyStore extends CI_Controller {
         
 		redirect('candystore/index', 'refresh');	
 		}
-		
-		
-		
+
 	}
 	
-	function logout(){
+	function clearCart(){
 		setcookie('candystore', "", time()-(60*60*24*30), '/');
-		session_destroy();
 		redirect('candystore/index', 'refresh');
 	}
 	
+	function logout(){
+		clearCart();
+		session_destroy();
+		redirect('candystore/index', 'refresh');			
+	}
 	
 	function login(){
 		$this->load->view('customer/login.php');

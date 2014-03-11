@@ -108,7 +108,7 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 .footer {
 	padding: 10px 0;
 	background: #FF0800;
-	clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
+	clear: both;
 }
 
 /* ~~ miscellaneous float/clear classes ~~ */
@@ -138,11 +138,11 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
   
   <?php
 	if ((isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true )    ) {	
-	?>
-			<p>
+	
+	?><p>
 			Hi <?= $_SESSION['username']?>.
-			</p>     		
-	<?php 		
+			</p><div class='fltrt'><?php
+	
 		}
 		else {
 	 echo "<p>" . anchor('candystore/newCustomer','New Customer') . "</p>";
@@ -157,9 +157,11 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
       <li><?php 
 	echo "<p>" . anchor('candystore/listCustomer','List Customers') . "</p>"; ?></li>
       <li><?php 
-	echo "<p>" . anchor('candystore/logout','Clear Cart') . "</p>"; ?></li>
-      <li><a href="#">Logout</a></li>
-      <li><a href="#">Checkout</a></li>
+	echo "<p>" . anchor('candystore/clearCart','Clear Cart') . "</p>"; ?></li>
+      <li><?php if ((isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true )    ) {
+	echo "<p>" . anchor('candystore/logout','Logout') . "</p>";}else{ echo "<p>" . anchor('candystore/login','Login') . "</p>";  }?></li>
+      <li><?php 
+	echo "<p>" . anchor('candystore/logout','Checkout') . "</p>"; ?></li>
     </ul>
 <h3>Cart</h3>
 <?php
@@ -184,7 +186,6 @@ if(isset($_COOKIE["candystore"]))
 }
 ?>
     <!-- end .sidebar1 --></div>
-    <h1>Product Table</h1>
   <div class="container">
   <?php $qty = 3;
 echo "<p>" . anchor('candystore/newForm','Add New') . "</p>";
@@ -212,20 +213,9 @@ echo "<table>";
 
     <!-- end .content --></div>
   <div class="footer">
-  <?php
-	if ((isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true )    ) {	
-	?>
-			<p>
-			Hi <?= $_SESSION['username']?>.
-			</p>     		
-	<?php 		
-		}
-		else {
-	 echo "<p>" . anchor('candystore/login','Login') . "</p>";
-		}
-	?>	
 
-    <!-- end .footer --></div>
+
+  <!-- end .footer --></div>
   <!-- end .container --></div>
   
 </body>
