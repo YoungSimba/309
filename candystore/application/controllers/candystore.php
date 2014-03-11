@@ -223,9 +223,8 @@ class CandyStore extends CI_Controller {
 	}
 	
 	function logout(){
-		clearCart();
 		session_destroy();
-		redirect('candystore/index', 'refresh');			
+		$this->clearCart();			
 	}
 	
 	function login(){
@@ -242,6 +241,8 @@ class CandyStore extends CI_Controller {
 				if ($_SESSION['loggedin'] == true){
 					redirect('candystore/index', 'refresh');
 				}
+			}else{
+				redirect('candystore/index', 'refresh');
 			}
 			
 			

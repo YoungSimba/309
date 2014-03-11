@@ -1,3 +1,5 @@
+
+
 body {
 	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
 	background: #FFF;
@@ -101,7 +103,7 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 .footer {
 	padding: 10px 0;
 	background: #FF0800;
-	clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
+	clear: both;
 }
 
 /* ~~ miscellaneous float/clear classes ~~ */
